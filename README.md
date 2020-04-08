@@ -4,3 +4,7 @@ This repo contains pytorch implementations of Langevin Monte Carlo algorithms. T
 
 * Unadjusted Langevin Algorithm (ULA)
 * Metropolis-adjusted Langevin Algorithm (MALA)
+
+#### Visualization of ULA
+
+![ULA](/img/heart.gif)
