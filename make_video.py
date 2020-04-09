@@ -59,7 +59,7 @@ axn[1].set_title('Empirical Density')
 fig.suptitle('Langevin Dynamics Monte Carlo', fontsize=40)
 
 line, = axn[0].plot([], [], lw=2, c='#f3c623')
-scat = axn[0].scatter([], [], c='#00bcd4', s=100, marker='*')
+scat = axn[0].scatter([], [], c='#dd2c00', s=150, marker='*')
 
 def init():
     line.set_data([], [])
