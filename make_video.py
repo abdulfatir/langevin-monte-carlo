@@ -41,16 +41,16 @@ z = np.vstack([x.flatten(), y.flatten()]).T
 
 q0 = npdensity1(z)
 axn[0].pcolormesh(x, y, q0.reshape(x.shape),
-                           cmap='magma')
+                           cmap='viridis')
 axn[0].set_aspect('equal', adjustable='box')
 axn[0].set_xlim([-lim, lim])
 axn[0].set_ylim([-lim, lim])
 axn[0].set_title('True Density')
 
-cmap = matplotlib.cm.get_cmap('magma')
+cmap = matplotlib.cm.get_cmap('viridis')
 bg = cmap(0.)
 axn[1].set_facecolor(bg)
-# axn[1].hist2d(samples[:,0], samples[:,1], cmap='magma', rasterized=False, bins=200)
+# axn[1].hist2d(samples[:,0], samples[:,1], cmap='viridis', rasterized=False, bins=200)
 axn[1].set_aspect('equal', adjustable='box')
 axn[1].set_xlim([-lim, lim])
 axn[1].set_ylim([-lim, lim])
@@ -77,13 +77,13 @@ def random_walk(i):
     axn[1].clear()
 #     axn[1].set_facecolor(bg)
     axn[1].set_aspect('equal', adjustable='box')
-    axn[1].hist2d(samples[:i, 0], samples[:i, 1], cmap='magma', rasterized=False, bins=200, density=True)
+    axn[1].hist2d(samples[:i, 0], samples[:i, 1], cmap='viridis', rasterized=False, bins=200, density=True)
     axn[1].set_xlim([-lim, lim])
     axn[1].set_ylim([-lim, lim])
     axn[1].set_title('Empirical Density')
     return line, scat, #
 
 anim = animation.FuncAnimation( fig = fig, blit=True, init_func=init, func = random_walk,
-                                     interval = 2, frames=range(from_frame, upto_frame))
+                                     interval = 10, frames=range(from_frame, upto_frame))
 anim.save(f'{base_name}{from_frame}.mp4', writer='ffmpeg', dpi=200, progress_callback = lambda i, n: print(f'Saving frame {i} of {n}'))
 

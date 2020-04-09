@@ -8,10 +8,10 @@ samples=$1
 # Delete list.txt, if it exists.
 rm -f list.txt
 # Number of frames per process.
-nframes=2500
+nframes=250
 # Loop over and start 20 processes in background.
 # The number of processes can be changed depending on the machine.
-for (( k = 0; k < 20; ++k )); do
+for (( k = 0; k < 2; ++k )); do
   a=$(( nframes*k ))  
   python make_video.py --samples $samples --start $a --n $nframes &
   # Save PID to wait on it later.
