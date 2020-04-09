@@ -1,15 +1,9 @@
+# Generates samples from the heart-shaped density and writes to heart.npy
 import numpy as np
 import torch
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-plt.style.use('seaborn-poster')
-from tqdm import tqdm
 import random
 import math
-from matplotlib.animation import FFMpegWriter
-
+from tqdm import tqdm
 
 def potential(z):
     z = z.view(-1, 2)
@@ -17,7 +11,6 @@ def potential(z):
     u = 0.8 * x ** 2 + (y - ((x**2)**(1/3)))**2
     u = u / 2**2
     return u
-
 
 def unadjusted_langevin_algorithm(n_samples=100000, step=0.01):
     burn_in = 10000
@@ -34,4 +27,4 @@ def unadjusted_langevin_algorithm(n_samples=100000, step=0.01):
 
 
 samples = unadjusted_langevin_algorithm()
-np.save('heart.npy', samples)
+np.save('heart-ula.npy', samples)

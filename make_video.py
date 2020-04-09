@@ -1,28 +1,31 @@
+# Creates an MP4 video using samples from heart.npy 
 import numpy as np
 import torch
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-plt.style.use('seaborn-poster')
-from tqdm import tqdm
 import random
 import math
 import argparse
+from tqdm import tqdm
+plt.style.use('seaborn-poster')
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--start', type=int)
-parser.add_argument('--n', type=int)
+parser.add_argument('--samples', type=str, required=True, help='Path to the .npy file with samples.')
+parser.add_argument('--start', type=int, required=True, help='Start frame number.')
+parser.add_argument('--n', type=int, required=True, help='Number of frames.')
 
 args = parser.parse_args()
 
 from_frame = args.start
 upto_frame = args.n + from_frame
-
-samples = np.load('heart.npy')
+base_name = args.samples.strip('.npy')
+samples = np.load(args.samples)
 
 plt.rcParams["font.family"] = "serif"
 fig, axn = plt.subplots(ncols=2, figsize=(15, 8))
+
 def npdensity1(z):
     z = np.reshape(z, [z.shape[0], 2])
     x, y = z[:, 0], z[:, 1]
@@ -81,6 +84,6 @@ def random_walk(i):
     return line, scat, #
 
 anim = animation.FuncAnimation( fig = fig, blit=True, init_func=init, func = random_walk,
-                                     interval = 10, frames=range(from_frame, upto_frame))
-anim.save(f'heart{from_frame}.mp4', writer='ffmpeg', dpi=200, progress_callback = lambda i, n: print(f'Saving frame {i} of {n}'))
+                                     interval = 2, frames=range(from_frame, upto_frame))
+anim.save(f'{base_name}{from_frame}.mp4', writer='ffmpeg', dpi=200, progress_callback = lambda i, n: print(f'Saving frame {i} of {n}'))
 
